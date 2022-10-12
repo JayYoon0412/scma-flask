@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  server:
+    platform: linux/x86_64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+
+  database:
+    platform: linux/x86_64
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: 'myserver'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - 3306:3306
