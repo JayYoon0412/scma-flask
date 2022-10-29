@@ -1,74 +1,67 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Project: SuperCool Mini Amazon Web
+Mini Web Amazon running on Flask with DB as PostgreSQL
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Team Members:
+###### Jay: responsible for Products client and server </br>
+brief updates from Milestone 1: </br>
+- Translated entity and tables onto ERD diagram
+- Updated create.py to reflect changes to entity attributes and many-to-one relationships
+- Updated generate.py for populating larger scale dummy database using Faker
+</br>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+###### Minwoo: responsible for Cart client and server </br>
+brief updates from Milestone 1: </br>
+- Made contributions to constructing relevant logic for E/R design
+- Contributed to translating E/R diagrams to tables
+- Created and organized GitLab repository of the project
+</br>
 
-## Description
+###### Qihan: responsible for Social client and server </br>
+brief updates from Milestone 1: </br>
+- Contributed to datatables specification, defining assumptions and constraints
+- Contributed to page-by-page design
+- Contributed to user flow
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+</br>
 
-## Installation
+###### Yanpeng: responsible for Seller client and server </br>
+brief updates from Milestone 1: </br>
+- Contributed to E/R design, setting up entity primary key and relations
+- Contributed to page design
+</br>
 
-```bash
-$ npm install
+###### Michael: responsible for User client and server </br>
+brief updates from Milestone 1: </br>
+- Contributed to E/R design, removing any redundancies in design
+- Contributed to page-by-page design, and user flow focusing on content
+</br>
+
+## Running Sample Database
+1. install dependencies (run on environment) </br>
 ```
-
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+source env/bin/activate
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+2. generate appropriate dummy data using Faker by running gen.py </br>
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
-# mini-amazon
+cd db/generated
+python gen.py
+```
+3. populate and set up sample amazon psql database </br>
+```
+cd super-cool-mini-amazon-project
+./setup.sh
+```
+4. to see sample database, open amazon db on terminal </br>
+```
+cd
+psql amazon
+```
+to see all created tables:
+```
+\dt
+```
+to see data in specific table (populated with dummy data for now):
+```
+TABLE (tablename);
+```
+5. to change number of dummy data generated (number of instances of each entity), edit num_(entity_name) variable located in gen.py
