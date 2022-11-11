@@ -1,3 +1,10 @@
+* {
+}
+
+.searchBox {
+    display: flex;
+}
+
 section {
 color: #fff;
 text-align: center;
@@ -20,4 +27,21 @@ background-color: #b6701e;
 position: absolute;
 right: 0px;
 width: 50%;
+}
+
+.profile-grid {
+    display: block;
+    border-radius: 4px;
+    border: 1px #ddd solid;
+}
+
+.profile-item {
+    list-style: none;
+    padding: 14px 18px;
+}
+
+.edit-button {
+    background-color: #ddd;
+    color: black;
+    border-color: #ddd;
 }

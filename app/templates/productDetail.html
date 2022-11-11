@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br/>
+
+<h1 class="display-4">Product Detail Page: Product No. {{product.id}}</h1>
+
+<div class="card" style="width: 86rem;">
+  <div class="card-body">
+    <h5 class="card-title">Product Name: {{product.name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Uploaded {{product.createdAt}}</h6>
+    <p class="card-text">Short Description: {{product.description}} || Category: {{product.category}} || Price: ${{product.price}}</p>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+
+<br/>
+<br/>
+
+<h2>In Stock:</h2>
+    <table class='table table-hover table-bordered container'>
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Seller ID</th>
+          <th scope="col">Quantity</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for inv in inventories %}
+          <tr>
+            <th scope="row">{{inv.seller_id}}</th>
+            <td>{{inv.quantity}}</td>
+            <td><a href="#" class="card-link">Add To Cart</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  
+<br/>
+<br/>
+
+<!-- {% for review in reviews %}
+uploaded at {{review.createdAt}}
+{{review.rating}}
+{{review.description}}
+{% endfor %} -->
+
+  <br/>
+  <br/>
+  <br/>
+
+  <h2>Product Reviews:</h2>
+    <table class='table table-hover table-bordered container'>
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Reviewed At</th>
+          <th scope="col">Rating</th>
+          <th scope="col">Description</th>
+          <th scope="col">User ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for review in reviews %}
+          <tr>
+            <th scope="row">{{review.createdAt}}</th>
+            <td>{{review.rating}}</td>
+            <td>{{review.description}}</td>
+            <td>{{review.writerId}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  
+  <br/>
+      <!-- Button trigger modal -->
+  <button type="button" style="float: right;" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Add Review
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Review Product {{product.id}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="post">
+            {{ updateForm.hidden_tag() }}
+            <p>
+                {{ updateForm.writerId.label}}<br/>
+                {{ updateForm.writerId(size=32) }}<br/>
+                {{ updateForm.rating.label}}<br/>
+                {{ updateForm.rating(size=32) }}<br/>
+                {{ updateForm.descp.label}}<br/>
+                {{ updateForm.descp(size=32) }}<br/>
+            </p>
+            <p>{{ updateForm.submit() }}</p>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

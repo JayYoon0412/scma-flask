@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br/>
+
+<h3>Search For Your Cart:</h3>
+
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.searchNumber.label }}<br/>
+        {{ form.searchNumber(size=32) }}<br/>
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+
+<!-- <div class="searchBox">
+    <input class="form-control" type="text" placeholder="Enter number of products...">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</div> -->
+
+<br><br>
+{% if search_cart %}
+<h3>Search Results:</h3>
+<table class='table table-hover table-bordered container'>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">User ID</th>
+      <th scope="col">Product ID</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cItem in search_cart%}
+      <tr>
+        <th scope="row">{{cItem.ownerId}}</th>
+        <th scope="row">{{cItem.productId}}</th>
+        <td>{{cItem.name}}</td>
+        <td>{{cItem.price}}</td>
+        <td>{{cItem.category}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% extends "base.html" %}
+
+{% block content %}
+
+<br/>
+
+<h3>Search For Your Cart:</h3>
+
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.searchNumber.label }}<br/>
+        {{ form.searchNumber(size=32) }}<br/>
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+
+<!-- <div class="searchBox">
+    <input class="form-control" type="text" placeholder="Enter number of products...">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</div> -->
+
+<br><br>
+{% if search_cart %}
+<h3>Search Results:</h3>
+<table class='table table-hover table-bordered container'>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">User ID</th>
+      <th scope="col">Product ID</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cItem in search_cart%}
+      <tr>
+        <th scope="row">{{cItem.ownerId}}</th>
+        <th scope="row">{{cItem.productId}}</th>
+        <td>{{cItem.name}}</td>
+        <td>{{cItem.price}}</td>
+        <td>{{cItem.category}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

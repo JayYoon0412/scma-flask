@@ -3,13 +3,13 @@ import csv
 from faker import Faker
 
 # number of sample entities to be generated
-num_users = 10
-num_products = 20
-num_inventories = 10
-num_orders = 10
-num_cartItems = 10
-num_productReviews = 10
-num_sellerReviews = 10
+num_users = 100
+num_products = 2000
+num_inventories = 3000
+num_orders = 3000
+num_cartItems = 2000
+num_productReviews = 2000
+num_sellerReviews = 2000
 
 Faker.seed(0)
 fake = Faker()
@@ -55,7 +55,7 @@ def gen_products(num_products):
             available = fake.random_element(elements=('true', 'false'))
             category = fake.random_element(elements=('fiction', 'nonfiction', 'drama', 'poetry'))
             createdAt = fake.date_time()
-            imageSrc = fake.file_name(extension='jpeg')
+            imageSrc = fake.image_url(width=640, height=480)
             if available == 'true':
                 available_pids.append(pid)
             writer.writerow([pid, name, description, price, available, category, createdAt, imageSrc])
@@ -102,7 +102,7 @@ def gen_cartItems(num_cartItems, num_users, num_orders, available_pids):
             quantity = fake.random_int(min=1, max=10)
             isOrdered = fake.pybool()
             isFulfilled = fake.pybool()
-            writer.writerow([ownerId, productId, orderId, sellerId, quantity, isOrdered, isFulfilled])
+            writer.writerow([id, ownerId, productId, orderId, sellerId, quantity, isOrdered, isFulfilled])
         print(f'{num_cartItems} cart items created')
     return
 
@@ -132,6 +132,7 @@ def gen_sellerReviews(num_sellerReviews, available_pids, num_users):
             description = fake.sentence(nb_words=15)
             sellerId = fake.random_int(min=0, max=num_users-1)
             writerId = fake.random_int(min=0, max=num_users-1)
+            writer.writerow([id, createdAt, rating, description, sellerId, writerId])
         print(f'{num_sellerReviews} seller reviews created')
     return
 

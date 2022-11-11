@@ -4,7 +4,17 @@
 
 <br><br>
 
-<h2>Products for sale:</h2>
+{% if current_user.is_authenticated %}
+<div class="jumbotron">
+  <h1 class="display-4">Hello, {{current_user.firstname}}!</h1>
+  <p class="lead">Welcome to SCMA</p>
+  <hr class="my-4">
+  <p>Please Look Around. We have a lot of new products for sale.</p>
+  <p class="lead"></p>
+</div>
+{% endif %}
+
+<h3>Check out New Products for sale:</h3>
 <table class='table table-hover table-bordered container'>
   <thead class="thead-dark">
     <tr>
@@ -26,27 +36,9 @@
 
 <br><br>
 {% if current_user.is_authenticated %}
-<h2>Your recent purchases:</h2>
-<table class='table table-hover table-bordered container'>
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Purchase ID</th>
-      <th scope="col">Product Name</th>
-      <th scope="col">Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for purchase in purchase_history%}
-      <tr>
-        <th scope="row">{{purchase.id}}</th>
-        <td>{{purchase.pid}}</td>
-        <td>{{purchase.time_purchased}}</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+
 {% else %}
-<p><a href="{{ url_for('users.login') }}">Log in</a> to see your purchase history!</p>
+<p><a href="{{ url_for('users.login') }}">Log in</a> to see your order history!</p>
 {% endif %}
 
 {% endblock %}

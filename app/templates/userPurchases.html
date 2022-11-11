@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br/>
+
+<h3>Search For Recent User Purchases</h3>
+
+<form action="" method="post">
+    {{ purchasesForm.hidden_tag() }}
+    <p>
+        {{ purchasesForm.user_id.label }}<br/>
+        {{ purchasesForm.user_id(size=32) }}<br/>
+    </p>
+    <p>{{ purchasesForm.submit() }}</p>
+</form>
+
+<br><br>
+{% if purchases %}
+<h3>Past Purchases:</h3>
+<table class='table table-hover table-bordered container'>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">UserID</th>
+      <th scope="col">ProductId</th>
+      <th scope="col">ProductName</th>
+      <th scope="col">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for purchase in purchases %}
+      <tr>
+        <th scope="row">{{purchase.ownerId}}</th>
+        <td>{{purchase.productId}}</td>
+        <td>{{purchase.productName}}</td>
+        <td>{{purchase.quantity}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

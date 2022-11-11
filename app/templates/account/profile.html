@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br/>
+{% if user %}
+<p>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+              {% for message in messages %}
+              <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+        </p>
+<h2>Your Account Information</h2>
+    <div class="profile-grid">
+        <ul>
+            <li class="profile-item">
+                <strong>Name:</strong>
+                <div>{{ user.firstname }} {{ user.lastname }}</div>
+                <a class="btn btn-primary edit-button" href="{{ url_for('users.edit_name') }}">Edit</a>
+            </li>
+            <li class="profile-item">
+                <strong>Email:</strong>
+                <div>{{ user.email }}</div>
+                <a class="btn btn-primary edit-button" href="{{ url_for('users.edit_email') }}">Edit</a>
+            </li>
+            <li class="profile-item">
+                <strong>Password:</strong>
+                <div>********</div>
+                <a class="btn btn-primary edit-button" href="{{ url_for('users.edit_password') }}">Edit</a>
+            </li>
+            <li class="profile-item">
+                <strong>Address:</strong>
+                <div>{{ user.address }}</div>
+                <a class="btn btn-primary edit-button" href="{{ url_for('users.edit_address') }}">Edit</a>
+            </li>
+            <li class="profile-item">
+                <strong>Balance:</strong>
+                <div>${{"%.2f" % user.balance }}</div>
+                <a class="btn btn-primary edit-button" href="/account">Edit</a>
+            </li>
+        </ul>
+    </div>
+
+    <br/>
+
+<h2>Your Recent Orders:</h2>
+    <table class='table table-hover table-bordered container'>
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Order ID</th>
+          <th scope="col">Order Date</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+    {#    {% for purchase in purchase_history%}#}
+    {#      <tr>#}
+    {#        <th scope="row">{{purchase.id}}</th>#}
+    {#        <td>{{purchase.pid}}</td>#}
+    {#        <td>{{purchase.time_purchased}}</td>#}
+    {#      </tr>#}
+    {#    {% endfor %}#}
+      </tbody>
+    </table>
+{% endif %}
+
+{% endblock %}

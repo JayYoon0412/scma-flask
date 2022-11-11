@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="header-container" style="display: flex; align-items: center;">
+    <div style="font-size: 30px; margin: 50px 0 10px 5px;">Browse All Products: </div>
+
+    <form action="" method="post" style="margin: 40px 0px 0px 10px;">
+        {{ form.hidden_tag() }}
+        {{ form.searchWord(size=50) }}
+        <input type="submit" value="search">
+    </form>
+
+    <div style="padding: 0; margin-left: auto; margin-top: 40px">Sort By:
+        <a class="link" href="{{url_for('products.getSortedPriceProducts', order='asc')}}">Low Price</a>
+        <a class="link" href="{{url_for('products.getSortedPriceProducts', order='desc')}}">High Price</a>
+    </div>
+</div>
+
+
+<div class="container" style="display: flex;">
+<div class="side-bar" style="width: 30%; margin-top: 35px; margin-left: -130px; border: 1px solid black; padding: 20px;">
+    <p>Filter by <b>Category</b>:</p>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="{{url_for('products.getByCategory', category='fiction')}}">Fiction</a>
+    <a class="dropdown-item" href="{{url_for('products.getByCategory', category='nonfiction')}}">NonFiction</a>
+    <a class="dropdown-item" href="{{url_for('products.getByCategory', category='drama')}}">Drama</a>
+    <a class="dropdown-item" href="{{url_for('products.getByCategory', category='poetry')}}">Poetry</a>
+    <br/>
+    <br/>
+    Filter by <b>Price Range</b>:
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="{{url_for('products.getByPriceRange', lowerBound=100, upperBound=200)}}">$100 ~ $200</a>
+    <a class="dropdown-item" href="{{url_for('products.getByPriceRange', lowerBound=200, upperBound=300)}}">$200 ~ $300</a>
+    <a class="dropdown-item" href="{{url_for('products.getByPriceRange', lowerBound=300, upperBound=400)}}">$300 ~ $400</a>
+    <a class="dropdown-item" href="{{url_for('products.getAbovePriceProducts', lowerBound=400)}}">Above $400</a>
+</div>
+<div class="card-container" style="width: 1500px; display: flex; flex-wrap: wrap; margin: 20px;">
+
+{% for product in products%}
+<div id={{product.id}} class="card" style="width: 18rem; margin: 15px;">
+    <img class="card-img-top" src={{product.imageSrc}} alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text">${{product.price}} {{product.category}}</p>
+      <a href="{{url_for('products.getProductById', productId=product.id)}}" class="btn btn-primary">See Details</a>
+    </div>
+  </div>
+{% endfor %}
+
+</div>
+</div>
+
+{% set count = totalNum %}
+
+<nav aria-label="Page navigation example" style="margin-left: 130px;">
+    <ul class="pagination justify-content-center">
+      {%for i in range(1, count)%} 
+      <li class="page-item"><a class="page-link" href="{{url_for('products.getProductsPage', pageNumber=i)}}">{{i}}</a></li>
+      {%endfor%} 
+    </ul>
+  </nav>
+
+{% endblock %}

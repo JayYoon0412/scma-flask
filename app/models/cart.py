@@ -6,31 +6,37 @@ class Cart:
     This is just a TEMPLATE for Cart, you should change this by adding or 
         replacing new columns, etc. for your design.
     """
-    def __init__(self, id, uid, pid, time_added_to_cart):
-        self.id = id
-        self.uid = uid
-        self.pid = pid
-        self.time_added_to_cart = time_added_to_cart
+    def __init__(self, ownerId, productId, orderId, sellerId, quantity, isOrdered, isFulfilled, name, price, category):
+        self.ownerId = ownerId
+        self.productId = productId
+        self.orderId = orderId
+        self.sellerId = sellerId
+        self.quantity = quantity
+        self.isOrdered = isOrdered
+        self.isFulfilled = isFulfilled
+        self.name = name
+        self.price = price
+        self.category = category
 
     @staticmethod
-    def get(id):
+    def get(ownerId):
         rows = app.db.execute('''
-SELECT id, uid, pid, time_added_to_cart
-FROM Cart
-WHERE id = :id
+SELECT *
+FROM CartItems
+WHERE ownerId = :ownerId
 ''',
-                              id=id)
+                              ownerId=ownerId)
         return Cart(*(rows[0])) if rows else None
 
     @staticmethod
-    def get_all_by_uid_since(uid, since):
+    def get_all_by_ownerid(ownerId, ordered = False):
         rows = app.db.execute('''
-SELECT id, uid, pid, time_added_to_cart
-FROM Cart
-WHERE uid = :uid
-AND time_added_to_cart >= :since
-ORDER BY time_added_to_cart DESC
+SELECT c.ownerId as ownerId, c.productId as productId, c.orderId as orderId, c.sellerId as sellerId, c.quantity as quantity, c.isOrdered as isOrdered, c.isFulfilled as isFulfilled, p.name as name, p.price as price, p.category as category
+FROM CartItems c, Products p
+WHERE c.ownerId = :ownerId
+AND c.isOrdered = :ordered
+AND c.productId = p.id
 ''',
-                              uid=uid,
-                              since=since)
+                              ownerId=ownerId,
+                              ordered=ordered)
         return [Cart(*row) for row in rows]
